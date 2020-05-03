@@ -1,0 +1,7 @@
+
+obligation-cordapp/.gradle/*
+source/bin/*
+obligation-cordapp/java-source/build/*
+obligation-cordapp/kotlin-source/build/*
+obligation-cordapp/build/*
+obligation-cordapp/gradle/wrapper/*
