@@ -227,11 +227,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Url</th>
+                        <th>Preview</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Amount</th>
-                        <th>Paid</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -245,12 +244,9 @@
                         <td class="vert-align">{{artObject.lender.substring(0,30)}}</td>
                         <td class="vert-align">{{artObject.borrower.substring(0,30)}}</td>
                         <td class="vert-align">{{artObject.amount}}</td>
-                        <td class="vert-align">{{artObject.paid}}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <button ng-click="demoApp.openTransferModal(artObject.linearId.id)" type="button" class="btn btn-primary">Transfer
-                                </button>
-                                <button ng-click="demoApp.openSettleModal(artobject.linearId.id)" type="button" class="btn btn-primary">Settle
                                 </button>
                             </div>
                         </td>

@@ -126,8 +126,8 @@ public class ArtObject implements LinearState {
             borrowerString = toBase58String(borrowerKey);
         }
 
-        return String.format("Art(%s): %s owes %s %s and has paid %s so far.",
-                this.linearId, borrowerString, lenderString, this.amount, this.paid);
+        return String.format("Art(%s): %s owes %s %s",
+                this.linearId, borrowerString, lenderString, this.amount);
     }
 
     @Override
