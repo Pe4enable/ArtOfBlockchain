@@ -56,6 +56,10 @@
                 <label for="createArtObjectAmount" class="control-label">Amount (Int):</label>
                 <input type="text" ng-model="createArtObjectModal.form.amount" class="form-control" id="createArtObjectAmount">
             </div>
+            <div class="form-group">
+                <label for="createArtObjectAmount" class="control-label">Url:</label>
+                <input type="text" ng-model="createArtObjectModal.form.url" class="form-control" id="createArtObjectUrl">
+            </div>
             <div ng-show="createArtObjectModal.formError" class="form-group">
                 <div class="alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -223,6 +227,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>Url</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Amount</th>
@@ -232,6 +237,11 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="artObject in demoApp.artObjects">
+                        <td class="vert-align">
+                            <a target="_blank" rel="noopener noreferrer" href={{artObject.url}}>
+                                <img src={{artObject.url}} width="100px"/>
+                            </a>
+                        </td>
                         <td class="vert-align">{{artObject.lender.substring(0,30)}}</td>
                         <td class="vert-align">{{artObject.borrower.substring(0,30)}}</td>
                         <td class="vert-align">{{artObject.amount}}</td>

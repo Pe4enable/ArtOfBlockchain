@@ -94,7 +94,8 @@ public class ArtObjectApi {
                             possiblyWellKnownLender,
                             possiblyWellKnownBorrower,
                             state.getPaid(),
-                            state.getLinearId());
+                            state.getLinearId(),
+                            state.getUrl());
                 })
                 .collect(toList());
     }
@@ -145,7 +146,8 @@ public class ArtObjectApi {
     public Response issueArtObject(
             @QueryParam(value = "amount") int amount,
             @QueryParam(value = "currency") String currency,
-            @QueryParam(value = "party") String party) {
+            @QueryParam(value = "party") String party,
+            @QueryParam(value = "url") String url) {
 
         // 1. Get party objects for the counterparty.
         final Set<Party> lenderIdentities = rpcOps.partiesFromName(party, false);
@@ -162,7 +164,7 @@ public class ArtObjectApi {
         try {
             final FlowHandle<SignedTransaction> flowHandle = rpcOps.startFlowDynamic(
                     IssueArtObject.Initiator.class,
-                    issueAmount, lenderIdentity, true
+                    issueAmount, lenderIdentity, true, url
             );
 
             final SignedTransaction result = flowHandle.getReturnValue().get();

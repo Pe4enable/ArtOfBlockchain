@@ -20,7 +20,7 @@ angular.module('demoAppModule').controller('TransferModalCtrl', function ($http,
 
             $uibModalInstance.close();
 
-            const issueArtBojectEndpoint =
+            const issueArtObjectEndpoint =
                 apiBaseURL +
                 `transfer-artObject?id=${id}&party=${party}`;
 

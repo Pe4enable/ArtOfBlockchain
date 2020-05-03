@@ -29,6 +29,7 @@ public class IssueArtObject {
         private final Amount<Currency> amount;
         private final Party lender;
         private final Boolean anonymous;
+        private final String url;
 
         private final Step INITIALISING = new Step("Performing initial steps.");
         private final Step BUILDING = new Step("Performing initial steps.");
@@ -48,10 +49,11 @@ public class IssueArtObject {
                 INITIALISING, BUILDING, SIGNING, COLLECTING, FINALISING
         );
 
-        public Initiator(Amount<Currency> amount, Party lender, Boolean anonymous) {
+        public Initiator(Amount<Currency> amount, Party lender, Boolean anonymous, String url) {
             this.amount = amount;
             this.lender = lender;
             this.anonymous = anonymous;
+            this.url = url;
         }
 
         @Override
@@ -101,9 +103,9 @@ public class IssueArtObject {
         private ArtObject createArtObject(FlowSession lenderSession) throws FlowException {
             if (anonymous) {
                 final LinkedHashMap<Party, AnonymousParty> anonymousIdentities = subFlow(new SwapIdentitiesFlow(lenderSession));
-                return new ArtObject(amount, anonymousIdentities.get(lenderSession.getCounterparty()), anonymousIdentities.get(getOurIdentity()));
+                return new ArtObject(amount, anonymousIdentities.get(lenderSession.getCounterparty()), anonymousIdentities.get(getOurIdentity()), url);
             } else {
-                return new ArtObject(amount, lender, getOurIdentity());
+                return new ArtObject(amount, lender, getOurIdentity(), url);
             }
         }
     }

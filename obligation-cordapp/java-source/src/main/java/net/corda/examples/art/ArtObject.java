@@ -25,34 +25,42 @@ public class ArtObject implements LinearState {
     private final AbstractParty borrower;
     private final Amount<Currency> paid;
     private final UniqueIdentifier linearId;
+    private final String url;
 
     @ConstructorForDeserialization
-    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower, Amount<Currency> paid, UniqueIdentifier linearId) {
+    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower, Amount<Currency> paid, UniqueIdentifier linearId, String url) {
         this.amount = amount;
         this.lender = lender;
         this.borrower = borrower;
         this.paid = paid;
         this.linearId = linearId;
+        this.url = url;
     }
 
-    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower, Amount<Currency> paid) {
+    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower, Amount<Currency> paid, String url) {
         this.amount = amount;
         this.lender = lender;
         this.borrower = borrower;
         this.paid = paid;
         this.linearId = new UniqueIdentifier();
+        this.url = url;
     }
 
-    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower) {
+    public ArtObject(Amount<Currency> amount, AbstractParty lender, AbstractParty borrower, String url) {
         this.amount = amount;
         this.lender = lender;
         this.borrower = borrower;
         this.paid = new Amount<>(0, amount.getToken());
         this.linearId = new UniqueIdentifier();
+        this.url = url;
     }
 
     public Amount<Currency> getAmount() {
         return amount;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public AbstractParty getLender() {
@@ -83,16 +91,17 @@ public class ArtObject implements LinearState {
                 this.lender,
                 this.borrower,
                 this.paid.plus(amountToPay),
-                this.linearId
+                this.linearId,
+                this.url
         );
     }
 
     public ArtObject withNewLender(AbstractParty newLender) {
-        return new ArtObject(this.amount, newLender, this.borrower, this.paid, this.linearId);
+        return new ArtObject(this.amount, newLender, this.borrower, this.paid, this.linearId, this.url);
     }
 
     public ArtObject withoutLender() {
-        return new ArtObject(this.amount, NullKeys.INSTANCE.getNULL_PARTY(), this.borrower, this.paid, this.linearId);
+        return new ArtObject(this.amount, NullKeys.INSTANCE.getNULL_PARTY(), this.borrower, this.paid, this.linearId, this.url);
     }
 
     public List<PublicKey> getParticipantKeys() {
@@ -131,11 +140,12 @@ public class ArtObject implements LinearState {
                 && lender.equals(other.getLender())
                 && borrower.equals(other.getBorrower())
                 && paid.equals(other.getPaid())
-                && linearId.equals(other.getLinearId());
+                && linearId.equals(other.getLinearId())
+                && url.equals(other.getUrl());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, lender, borrower, paid, linearId);
+        return Objects.hash(amount, lender, borrower, paid, linearId, url);
     }
 }

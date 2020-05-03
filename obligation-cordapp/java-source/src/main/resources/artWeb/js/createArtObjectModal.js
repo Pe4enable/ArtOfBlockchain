@@ -17,13 +17,14 @@ angular.module('demoAppModule').controller('CreateArtObjectModalCtrl', function(
             const amount = createArtObjectModal.form.amount;
             const currency = createArtObjectModal.form.currency;
             const party = createArtObjectModal.form.counterparty;
+            const url = createArtObjectModal.form.url;
 
             $uibModalInstance.close();
 
             // We define the ArtObject creation endpoint.
             const issueArtObjectEndpoint =
                 apiBaseURL +
-                `issue-artObject?amount=${amount}&currency=${currency}&party=${party}`;
+                `issue-artObject?amount=${amount}&currency=${currency}&party=${party}&url=${url}`;
 
             // We hit the endpoint to create the ArtObject and handle success/failure responses.
             $http.get(issueArtObjectEndpoint).then(
