@@ -2,6 +2,7 @@
 # The Block.Art CorDapp
 
 Decentralized tokenisation platform, which consist from 4 independent nodes and 3 webservers for them. This platform allows to create digital alias (token) of art object, transfer right ownerships to other participants and brief history of owners for art objects.
+For more details, check presentation (https://github.com/Pe4enable/ArtOfBlockchain/blob/master/BlockArt.pdf)
 
 # Instructions for setting up
 
